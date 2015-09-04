@@ -12,7 +12,9 @@ f = open('data.json','wb')
 queue = deque()
 visited = set()
  
-url = 'http://news.dbanotes.net'  # 入口页面, 可以换成别的
+#url = 'http://news.dbanotes.net/'  # 入口页面, 可以换成别的
+url = 'http://news.baidu.com/'  # 入口页面, 可以换成别的
+char_type = 'utf-8'
  
 queue.append(url)
 cnt = 0
@@ -35,20 +37,24 @@ while queue:
   	# 避免程序异常中止, 用try..catch处理异常
   	try:
     		data = urlop.read()
-		link_re = re.compile(r'<a.*?>(.*?)</a>')
+		# Find out Web charset type
+		char_match = re.search(r'.*?charset=(.*?)[\'\"].*?',data)
+		if char_match:
+			char_type = char_match.group(1) 
+		data = data.decode(char_type).encode('utf-8')
+		link_re = re.compile(r'<a.*?href=[\"\']([http://|https://].*?)[\"\'].*?>(.*?)</a>')
 		link_list = link_re.findall(data)
 		for i in link_list:
-			#link_text = i.decode('utf-8')
-			print i 
-			#json_str = json.dumps(link_text) + '\n\n'
-			f.write(i)
+			f.write(i[0])
+			f.write('\n')
+			f.write(i[1])
 			f.write('\n\n')
   	except:
 		print 'Unexpected exception.'
-    		continue
+    		#continue
  
   	# 正则表达式提取页面中所有队列, 并判断是否已经访问过, 然后加入待爬队列
-  	linkre = re.compile('href=\"(.+?)\"')
+  	linkre = re.compile(r'<a.*?href=[\"\']([http://|https://].*?)[\"\'].*?>.*?</a>')
   	for x in linkre.findall(data):
 	    	if 'http' in x and x not in visited:
       			queue.append(x)
