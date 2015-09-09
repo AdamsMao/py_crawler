@@ -16,10 +16,17 @@ if __name__ == "__main__":
         #browser.wk_click('a[class="switch_btn_focus"]', wait_load=True)  
 	#browser.wait(3)
 	# Input username & ID	
+<<<<<<< HEAD
         #browser.wk_fill('input[id="u"]', '464048025@qq.com')  
 	#browser.wait(3)
         #browser.wk_fill('input[id="p"]', 'Password')  
 	#browser.wait(3)
+=======
+        browser.wk_fill('input[name="account"]', '464048025@qq.com')  
+	browser.wait(3)
+        browser.wk_fill('input[name="password"]', 'PASSWORD')  
+	browser.wait(3)
+>>>>>>> a9f8eaebbb4c7e30a885d34532647f70ea517e45
 	# Click login
 	#browser.wk_click('input[id="login_button"]', wait_load=True)
 	# Wait to input verify code manually
