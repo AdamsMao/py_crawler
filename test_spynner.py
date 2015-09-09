@@ -18,7 +18,7 @@ if __name__ == "__main__":
 	# Input username & ID	
         browser.wk_fill('input[name="account"]', '464048025@qq.com')  
 	browser.wait(3)
-        browser.wk_fill('input[name="password"]', 'Dex156')  
+        browser.wk_fill('input[name="password"]', 'password')  
 	browser.wait(3)
 	# Click login
 	browser.wk_click('button[class="sign-button submit"]', wait_load=True)
