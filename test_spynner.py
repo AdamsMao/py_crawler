@@ -14,13 +14,16 @@ if __name__ == "__main__":
             	print 'Timeout.'  
          
         browser.wk_click('a[class="js-signin signin-switch with-icon"]', wait_load=True)  
+	browser.wait(3)
 	# Input username & ID	
         browser.wk_fill('input[name="account"]', '464048025@qq.com')  
 	browser.wait(3)
         browser.wk_fill('input[name="password"]', 'Dex156')  
 	browser.wait(3)
 	# Click login
-	#browser.wk_click('button[class="sign-button submit"]', wait_load=True)
+	browser.wk_click('button[class="sign-button submit"]', wait_load=True)
+	# Wait to input verify code manually
+	raw_input('wait to input verify code manually!')
         # 获取页面的HTML  
         html = browser.html  
         if html:  
